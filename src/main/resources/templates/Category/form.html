@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<head>
+    <title th:text="${pageTitle}">Biểu mẫu Category</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="mb-0 text-center"><i class="fa-solid fa-pen-to-square"></i> <span th:text="${pageTitle}"></span></h4>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/categories/save}" th:object="${category}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-bold">Tên danh mục <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Nhập tên danh mục..." required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">Mô tả</label>
+                            <textarea class="form-control" id="description" th:field="*{description}" rows="4" placeholder="Nhập mô tả chi tiết..."></textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <a th:href="@{/categories}" class="btn btn-secondary px-4">
+                                <i class="fa-solid fa-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fa-solid fa-floppy-disk"></i> Lưu thông tin
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

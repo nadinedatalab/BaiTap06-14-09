@@ -16,7 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public Page searchAndPaginate(String keyword, Pageable pageable) {
+    public Page<Category> searchAndPaginate(String keyword, Pageable pageable) {
         if (keyword != null && !keyword.trim().isEmpty()) {
             return categoryRepository.findByNameContainingIgnoreCase(keyword.trim(), pageable);
         }
@@ -24,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional findById(Long id) {
+    public Optional<Category> findById(Integer id) {
         return categoryRepository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         categoryRepository.deleteById(id);
     }
 }

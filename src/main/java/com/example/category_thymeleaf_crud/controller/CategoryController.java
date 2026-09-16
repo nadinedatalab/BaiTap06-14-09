@@ -31,7 +31,7 @@ public class CategoryController {
             Model model) {
 
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id").descending());
-        Page categoryPage = categoryService.searchAndPaginate(keyword, pageable);
+        Page<Category> categoryPage = categoryService.searchAndPaginate(keyword, pageable);
 
         model.addAttribute("categoryPage", categoryPage);
         model.addAttribute("keyword", keyword);
@@ -65,8 +65,8 @@ public class CategoryController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
-        Optional opt = categoryService.findById(id);
+    public String editForm(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
+        Optional<Category> opt = categoryService.findById(id);
         if (opt.isPresent()) {
             model.addAttribute("category", opt.get());
             model.addAttribute("pageTitle", "Cập nhật Category");
@@ -78,7 +78,7 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
             categoryService.deleteById(id);
             redirectAttributes.addFlashAttribute("successMessage", "Xóa danh mục thành công!");
